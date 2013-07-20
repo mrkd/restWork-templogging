@@ -222,14 +222,20 @@ def index(request):
     ############## END Get doors #####################
     
     ############## Get latest HVAC usage #############
-    lastHvacEntry = hvac_runtime.objects.all().order_by('dateTime').reverse()[0]
-    hvac_usage = []
-    
     hvac_entry = {}
-    hvac_entry['heatUsage'] =  str(lastHvacEntry.heatMinutes)
-    hvac_entry['coolUsage'] =  str(lastHvacEntry.coolMinutes)
+    hvac_usage = []
+    hvac_runtimeObjects = hvac_runtime.objects.all()
+    if hvac_runtimeObjects:
+        lastHvacEntry = hvac_runtime.objects.all().order_by('dateTime').reverse()[0]
+    
+        
+        hvac_entry['heatUsage'] =  str(lastHvacEntry.heatMinutes)
+        hvac_entry['coolUsage'] =  str(lastHvacEntry.coolMinutes)
 
-    hvac_usage.append(hvac_entry)
+        hvac_usage.append(hvac_entry)
+    else:
+        hvac_entry['heatUsage'] =  "No Data"
+        hvac_entry['coolUsage'] =  "No Data"
     ############ END Get latest HVAC usage ############
 
     t = loader.get_template('status/index.html')
