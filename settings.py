@@ -107,7 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'leeHouseSite.urls'
+ROOT_URLCONF = 'restWork-templogging.urls'
 
 TEMPLATE_DIRS = (
     PROJ_DIR + "/templates"
